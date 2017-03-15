@@ -12,18 +12,17 @@ import static util.UtilMethods.*;
  * Created by Anastasiya on 14.03.2017.
  */
 public class MailPage {
-
-    WebDriver driver;
     private final By buttonWriteLetter = By.xpath(".//*[@id='b-toolbar__left']//span[contains(@class,\'b-toolbar__btn\')]");
     private final By countIncomingMessages = By.xpath(".//*[@id='b-nav_folders']//*[@class=\'b-nav__item__count\']");
     private final By textAreaMailForSendingLetter = By.xpath("//input[@id='compose_to']/following-sibling::textarea[contains(@class, 'js-input')]");
     private final By textAreaThemeForSendingLetter = By.xpath(".//*[@class = \'compose-head__field\']/*[@class = \'b-input\']");
-    private final By buttonSendLetter = By.xpath(".//div[@data-name=\'send\']//*[contains(@class,\'b-toolbar__btn\')]");
+    private final By buttonSendLetter = By.xpath(".//div[@data-name='send']//*[contains(@class,\'b-toolbar__btn\')]");
     private final By buttonConfirmOk = By.xpath(".//*[@id='MailRuConfirm']//*[@class = \'is-compose-empty_in\']//button[contains(@class, \'ok\')]");
-    private final By itemIncomingMessages = By.xpath(".//*[@id='b-nav_folders']//*[@data-id=\'0\']/*[@class = \'b-nav__link\']");
+    private final By itemIncomingMessages = By.xpath(".//*[@id='b-nav_folders']//*[@data-id='0']/*[@class = \'b-nav__link\']");
     private final By shortDataIncomingLetter = By.xpath(".//*[@id='b-letters']//*[@class = \'b-datalist__body\']/div[1]//*[contains(@class, \'item__link\')]");
     private String themeLetterAttributeData = "data-subject";
     private String attributeTitle = "title";
+    WebDriver driver;
 
     public MailPage(WebDriver driver) {
         this.driver = driver;
@@ -69,7 +68,6 @@ public class MailPage {
     public MailPage sendMail(String strEmail, String strTheme) {
         int numberIncomingMessages;
         this.clickButtonWriteLetter();
-
         numberIncomingMessages = getNumberIncomingMessages();
         this.setEmailForSendingLetter(strEmail);
         this.setThemeForSendingLetter(strTheme);

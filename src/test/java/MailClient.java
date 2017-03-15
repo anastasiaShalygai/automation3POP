@@ -2,12 +2,15 @@ import grid.GridParallelTestBase;
 import grid.Parallelized;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.Platform;
 import pages.MailPage;
 import pages.RegistrationPage;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
  * Created by Anastasiya on 14.03.2017.
@@ -27,9 +30,14 @@ public class MailClient extends GridParallelTestBase {
 
     @Test
     public void checkMailClient() {
+        Properties props = new Properties();
+        try {
+            props.load(new FileReader("config.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         setPlatform(Platform.WINDOWS);
-        driver.get(urlMail);
-
+        driver.get(props.getProperty("base.usr"));
         objRegistration = new RegistrationPage(driver);
         objMail = objRegistration.loginToAuto(myEMail, myPassword);
         objMail.sendMail(myEMail, themeLetter);

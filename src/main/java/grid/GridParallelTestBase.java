@@ -2,7 +2,8 @@ package grid;
 
 import org.junit.Before;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -30,15 +31,17 @@ public class GridParallelTestBase {
         platformName = platform;
     }
 
+
     @Before
     public void setUp() throws Exception {
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         capabilities.setPlatform(platformName);
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("build", "JUnit-Parallel");
         driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilities);
     }
 
+    public WebDriver getInstance(){
+        return driver;
+    }
 }
